@@ -1,0 +1,3 @@
+-- Opens up an account
+account open harry@hh.se s3cr3t
+account deposit harry@hh.se s3cr3t 100
