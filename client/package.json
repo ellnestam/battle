@@ -30,7 +30,8 @@
     "dependencies": {
 	"q": "*",
 	"ncp": "*",
-	"optimist": "*"
+	"optimist": "*",
+	"lodash": "*"
     },
     "devDependencies": {
 	"grunt-contrib-jshint": "~0.6.4",

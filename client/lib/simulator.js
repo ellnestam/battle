@@ -2,6 +2,7 @@
 
 var http = require('http');
 var url = require('url');
+var _ = require('lodash');
 
 var port = 7331;
 
@@ -11,11 +12,11 @@ var simulator = {
 	var formattedUrl = url.format({hostname: bank.url,
 				       port: port,
 				       protocol: 'http',
-				       pathname: order.action,
+				       pathname:  order.type + '/' + order.action,
 				       search: simulator.credentials(order)
 				      });
 
-	
+	console.log("URL: " + formattedUrl);
 
 	http.get(formattedUrl, function(res) {
 	    console.log("Got response: " + res.statusCode);
@@ -28,11 +29,9 @@ var simulator = {
     },
 
     credentials : function(order) {
-	return 'user=' + order.user + 'pwd=' + order.pwd;
+	var res = _.map(order.parameters, function(val, key) {return key + "=" + val});
+	return res.join("&");
     }
-
-
-
 };
 
 module.exports = simulator;

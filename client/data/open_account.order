@@ -1,3 +1,49 @@
--- Opens up an account
-account open harry@hh.se s3cr3t
-account deposit harry@hh.se s3cr3t 100
+[
+    {
+	"delay" : "10", 
+	"type" : "account", 
+	"action" : "open", 
+	"parameters" : {"user" : "harry@hh.se",
+			"pwd" : "s3cr3t"}
+    },
+    {
+	"delay" : "10", 
+	"type" : "account", 
+	"action" : "deposit", 
+	"parameters" : {"user" : "harry@hh.se",
+			"pwd" : "s3cr3t",
+			"amount" : "1000"}
+    },
+    {
+	"delay" : "10", 
+	"type" : "account", 
+	"action" : "balance", 
+	"parameters" : {"user" : "harry@hh.se",
+			"pwd" : "s3cr3t"}
+    },
+    {
+	"delay" : "10", 
+	"type" : "account", 
+	"action" : "withdraw", 
+	"parameters" : {"user" : "harry@hh.se",
+	"pwd" : "s3cr3t",
+			"amount" : "1000"}
+    },
+    {
+	"delay" : "10", 
+	"type" : "loan", 
+	"action" : "apply", 
+	"parameters" : {"user" : "harry@hh.se",
+			"pwd" : "s3cr3t",
+			"amount" : "1000"}
+    },
+    {
+	"delay" : "10", 
+	"type" : "loan", 
+	"action" : "amortize", 
+	"parameters" : {"user" : "harry@hh.se",
+			"pwd" : "s3cr3t",
+			"amount" : "1000"}
+    }
+]
+
