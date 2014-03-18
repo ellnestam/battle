@@ -4,6 +4,8 @@
 var logger = {
 
     success: function(bank, order) {
+	console.log("Got response: " + res.statusCode);
+	
 	
 	if (order.action === 'apply') {
 	    // Save customer info
@@ -13,8 +15,8 @@ var logger = {
 	
     },
 
-    fail: function() {
-
+    fail: function(bank, order) {
+	console.log("Got error: " + e.message);
     }
 
 

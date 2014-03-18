@@ -9,20 +9,18 @@ var port = 7331;
 var simulator = {
 
     run : function(bank, order, logger) {
-	var formattedUrl = url.format({hostname: bank.url,
-				       port: port,
-				       protocol: 'http',
-				       pathname:  order.type + '/' + order.action,
-				       search: simulator.credentials(order)
-				      });
+	var callUrl = url.format({hostname: bank.url,
+				  port: port,
+				  protocol: 'http',
+				  pathname:  order.type + '/' + order.action,
+				  search: simulator.credentials(order)
+				 });
 
-	console.log("URL: " + formattedUrl);
+	console.log("URL: " + callUrl);
 
-	http.get(formattedUrl, function(res) {
-	    console.log("Got response: " + res.statusCode);
+	http.get(callUrl, function(res) {
 	    logger.success(bank, order);
 	}).on('error', function(e) {
-	    console.log("Got error: " + e.message);
 	    logger.fail(bank, order);
 	});
 	
