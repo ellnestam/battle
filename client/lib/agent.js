@@ -21,6 +21,8 @@ var agent = {
 	    var dest = opt.argv._[1];
 	    console.log('Simulating business ...');
 
+	    var clientData = {};
+	    
 	    fs.readFile('data/open_account.order', function(err, data) {
 		if (err) {
 		    console.log(err);
@@ -28,15 +30,15 @@ var agent = {
 		
 		var orders = JSON.parse(data);
 		var bank = {url: 'localhost'};
-		var sim = agent.createSimulator(bank, logger);
+		var sim = agent.createSimulator(bank, logger, clientData);
 		_.each(orders, sim);
 	    });
 	}
     },
     
-    createSimulator : function (bank, logger) {
+    createSimulator : function (bank, logger, clientData) {
 	return function(orders) {
-	    simulator.run(bank, orders, logger);
+	    simulator.run(bank, orders, logger, clientData);
 	}
     },
        

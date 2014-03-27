@@ -26,6 +26,6 @@ var legacy {
 
 }
 
-var srv = legacu.launch(process.argv);
+var srv = legacy.launch(process.argv);
 
 module.exports = legacy;
