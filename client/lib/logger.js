@@ -9,14 +9,17 @@ var logger = {
     success: function(bank, order, res, clientData) {
 	if (res.statusCode == '200') {
 	    console.log('Success');
+	    var params = order.parameters;
+	    if (order.parameters.user && !clientData[params.user]) {
+		clientData[params.user] = {pwd: params.pwd};
+	    }
 
 	    if (order.action === 'apply') {
-		logger.storeLoan(order.parameters, clientData);
-		console.log(clientData);
+		logger.storeLoan(order.parameters, order.id, clientData);
 	    } else if (order.action === 'open') {
 		// logger.storeAccount(order.parameters, clientData);
 	    } else if (order.action === 'amortize') {
-		// logger.amortize(order.parameters, clientData);
+		logger.amortize(order.parameters, order.id, clientData);
 	    } else {
 		console.log('Does not handle ' + order.action + ' yet');
 	    }
@@ -25,30 +28,25 @@ var logger = {
 	    console.log(res.statusCode);
 	}
 
+	console.log(clientData);
+
 
     },
 
-    storeLoan : function(parameters, clientData) {
-	if (clientData[parameters.user]) {
-	    clientData[parameters.user].pwd = parameters.pwd;
-	} else {
-	    clientData[parameters.user] = {pwd: parameters.pwd};
-	}
-	
+    storeLoan : function(parameters, id, clientData) {
+	var loans = {};
 	if (clientData[parameters.user].loans) {
-	    clientData[parameters.user].loans = {'LOAN_2' : parameters.amount}
-	} else {
-	    clientData[parameters.user].loans = {'LOAN_1' : parameters.amount}
-	}
+	    loans = clientData[parameters.user].loans;
+	} 
+	
+	loans[id] = parameters.amount;
+	clientData[parameters.user].loans = loans;
     },
 
 
-    amortize : function(parameters, clientData) {
-	clientData[parameters.user] = {pwd: parameters.pwd,
-				       loans: {
-					   'LOAN_1' : parameters.amount
-				       }
-				      };
+    amortize : function(parameters, id, clientData) {
+	// console.log(clientData[parameters.user].loans[id]);
+	clientData[parameters.user].loans[id] -= parameters.amount;
     },
 
     storeAccount : function(parameters, clientData) {

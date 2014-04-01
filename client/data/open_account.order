@@ -3,6 +3,7 @@
 	"delay" : "10", 
 	"type" : "account", 
 	"action" : "open", 
+	"id": "1",
 	"parameters" : {"user" : "harry@hh.se",
 			"pwd" : "s3cr3t"}
     },
@@ -10,6 +11,7 @@
 	"delay" : "10", 
 	"type" : "account", 
 	"action" : "deposit", 
+	"id": "1", 
 	"parameters" : {"user" : "harry@hh.se",
 			"pwd" : "s3cr3t",
 			"amount" : "1000"}
@@ -17,7 +19,8 @@
     {
 	"delay" : "10", 
 	"type" : "account", 
-	"action" : "balance", 
+	"action" : "balance",
+	"id": "1",
 	"parameters" : {"user" : "harry@hh.se",
 			"pwd" : "s3cr3t"}
     },
@@ -25,6 +28,7 @@
 	"delay" : "10", 
 	"type" : "account", 
 	"action" : "withdraw", 
+	"id": "1",
 	"parameters" : {"user" : "harry@hh.se",
 	"pwd" : "s3cr3t",
 			"amount" : "1000"}
@@ -32,7 +36,8 @@
     {
 	"delay" : "10", 
 	"type" : "loan", 
-	"action" : "apply", 
+	"action" : "apply",
+	"id": "1",
 	"parameters" : {"user" : "harry@hh.se",
 			"pwd" : "s3cr3t",
 			"amount" : "1000"}
@@ -40,7 +45,8 @@
     {
 	"delay" : "10", 
 	"type" : "loan", 
-	"action" : "amortize", 
+	"action" : "amortize",
+	"id": "1",
 	"parameters" : {"user" : "harry@hh.se",
 			"pwd" : "s3cr3t",
 			"amount" : "1000"}
