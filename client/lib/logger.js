@@ -8,14 +8,13 @@ var logger = {
 
     success: function(bank, order, res, clientData) {
 	if (res.statusCode == '200') {
-	    console.log('Success');
 	    var params = order.parameters;
 
 	    if (order.parameters.user && !clientData[params.user]) {
 		clientData[params.user] = {pwd: params.pwd};
 	    }
 
-	    console.log(clientData);
+	    // console.log(clientData);
 
 	    if (order.action === 'apply') {
 		logger.storeLoan(order.parameters, order.id, clientData);
@@ -36,10 +35,6 @@ var logger = {
 	    console.log('Error occurred');
 	    console.log(res.statusCode);
 	}
-
-	// console.log(clientData);
-
-
     },
 
     storeLoan : function(parameters, id, clientData) {
@@ -50,6 +45,7 @@ var logger = {
 	
 	loans[id] = parameters.amount;
 	clientData[parameters.user].loans = loans;
+	console.log('-> Storing loan');
     },
 
 
@@ -62,8 +58,8 @@ var logger = {
     },
 
     balance : function(parameters, id, clientData) {
-	console.log("Balance is " + clientData[parameters.user].accounts[id]);
-	// clientData[parameters.user].accounts[id] += parameters.amount;
+	// console.log("Balance is " + clientData[parameters.user].accounts[id]);
+	clientData[parameters.user].accounts[id] += parameters.amount;
     },
 
     withdraw : function(parameters, id, clientData) {

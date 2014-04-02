@@ -16,11 +16,6 @@ var simulator = {
 				  search: simulator.credentials(order)
 				 });
 
-	console.log("URL: " + callUrl);
-	
-	console.log(Date.now() - startTime);
-
-	
 	http.get(callUrl, function(res) {
 	    logger.success(bank, order, res, clientData);
 	}).on('error', function(e) {
