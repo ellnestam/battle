@@ -30,7 +30,7 @@
 	"action" : "withdraw", 
 	"id": "1",
 	"parameters" : {"user" : "harry@hh.se",
-	"pwd" : "s3cr3t",
+		     	"pwd" : "s3cr3t",
 			"amount" : "1000"}
     },
     {

@@ -10,16 +10,25 @@ var logger = {
 	if (res.statusCode == '200') {
 	    console.log('Success');
 	    var params = order.parameters;
+
 	    if (order.parameters.user && !clientData[params.user]) {
 		clientData[params.user] = {pwd: params.pwd};
 	    }
 
+	    console.log(clientData);
+
 	    if (order.action === 'apply') {
 		logger.storeLoan(order.parameters, order.id, clientData);
 	    } else if (order.action === 'open') {
-		// logger.storeAccount(order.parameters, clientData);
+		logger.storeAccount(order.parameters, order.id, clientData);
 	    } else if (order.action === 'amortize') {
-		logger.amortize(order.parameters, order.id, clientData);
+		// logger.amortize(order.parameters, order.id, clientData);
+	    } else if (order.action === 'deposit') {
+		// logger.deposit(order.parameters, order.id, clientData);
+	    } else if (order.action === 'withdraw') {
+		// logger.withdraw(order.parameters, order.id, clientData);
+	    } else if (order.action === 'balance') {
+		// logger.balance(order.parameters, order.id, clientData);
 	    } else {
 		console.log('Does not handle ' + order.action + ' yet');
 	    }
@@ -28,7 +37,7 @@ var logger = {
 	    console.log(res.statusCode);
 	}
 
-	console.log(clientData);
+	// console.log(clientData);
 
 
     },
@@ -45,16 +54,31 @@ var logger = {
 
 
     amortize : function(parameters, id, clientData) {
-	// console.log(clientData[parameters.user].loans[id]);
 	clientData[parameters.user].loans[id] -= parameters.amount;
     },
 
-    storeAccount : function(parameters, clientData) {
-	clientData[parameters.user] = {pwd: parameters.pwd,
-				       accounts: {
-					   'ACC_1' : 0
-				       }
-				      };
+    deposit : function(parameters, id, clientData) {
+	clientData[parameters.user].accounts[id] += parameters.amount;
+    },
+
+    balance : function(parameters, id, clientData) {
+	console.log("Balance is " + clientData[parameters.user].accounts[id]);
+	// clientData[parameters.user].accounts[id] += parameters.amount;
+    },
+
+    withdraw : function(parameters, id, clientData) {
+	clientData[parameters.user].accounts[id] -= parameters.amount;
+    },
+
+
+    storeAccount : function(parameters, id, clientData) {
+	var accounts = {};
+	if (clientData[parameters.user].accounts) {
+	    accounts = clientData[parameters.user].accounts;
+	} 
+	
+	accounts[id] = 0;
+	clientData[parameters.user].accounts = accounts;
     }
 
 };

@@ -30,7 +30,7 @@ var agent = {
 		
 		var orders = JSON.parse(data);
 		var bank = {url: 'localhost'};
-		var sim = agent.createSimulator(bank, logger, clientData);
+		var sim = agent.createSimulator(bank, logger, clientData, Date.now());
 		_.each(orders, sim);
 	    });
 	}

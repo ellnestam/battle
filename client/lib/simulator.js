@@ -8,7 +8,7 @@ var port = 7331;
 
 var simulator = {
 
-    run : function(bank, order, logger, clientData) {
+    run : function(bank, order, logger, clientData, startTime) {
 	var callUrl = url.format({hostname: bank.url,
 				  port: port,
 				  protocol: 'http',
@@ -17,7 +17,10 @@ var simulator = {
 				 });
 
 	console.log("URL: " + callUrl);
+	
+	console.log(Date.now() - startTime);
 
+	
 	http.get(callUrl, function(res) {
 	    logger.success(bank, order, res, clientData);
 	}).on('error', function(e) {
