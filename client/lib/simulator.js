@@ -8,20 +8,25 @@ var port = 7331;
 
 var simulator = {
 
-    run : function(bank, order, logger, clientData, startTime) {
+    run : function(bank, order, logger, clientData) {
 	var callUrl = url.format({hostname: bank.url,
 				  port: port,
 				  protocol: 'http',
 				  pathname:  order.type + '/' + order.action,
-				  search: simulator.credentials(order)
+				  search: simulator.credentials(order) + '&id=' + order.id
 				 });
 
+	console.log('Running order', order);
+
 	http.get(callUrl, function(res) {
-	    logger.success(bank, order, res, clientData);
+	    console.log('Doing business');
 	}).on('error', function(e) {
-	    logger.fail(bank, order);
+	    // logger.fail(bank, order);
 	});
 	
+	logger.success(bank, order, clientData);	
+
+	return clientData;
     },
 
     credentials : function(order) {

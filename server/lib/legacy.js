@@ -15,15 +15,8 @@ var legacy {
 	    var dataDir = args[1];
 	    var dest = opt.argv._[1];
 	    console.log('Start having fun ...');
-
-	    
-
-	    });
-	}
-    },
-
-
-
+	};
+    }
 }
 
 var srv = legacy.launch(process.argv);

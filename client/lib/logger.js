@@ -1,13 +1,14 @@
 'use strict';
 
+var q = require('q');
+
 var logger = {
 
     fail: function(bank, order) {
 	console.log("Got error: " + e.message);
     },
 
-    success: function(bank, order, res, clientData) {
-	if (res.statusCode == '200') {
+    success: function(bank, order, clientData) {
 	    var params = order.parameters;
 
 	    if (order.parameters.user && !clientData[params.user]) {
@@ -17,13 +18,13 @@ var logger = {
 	    // console.log(clientData);
 
 	    if (order.action === 'apply') {
-		logger.storeLoan(order.parameters, order.id, clientData);
+		return logger.storeLoan(order.parameters, order.id, clientData);
 	    } else if (order.action === 'open') {
 		logger.storeAccount(order.parameters, order.id, clientData);
 	    } else if (order.action === 'amortize') {
-		// logger.amortize(order.parameters, order.id, clientData);
+		logger.amortize(order.parameters, order.id, clientData);
 	    } else if (order.action === 'deposit') {
-		// logger.deposit(order.parameters, order.id, clientData);
+		logger.deposit(order.parameters, order.id, clientData);
 	    } else if (order.action === 'withdraw') {
 		// logger.withdraw(order.parameters, order.id, clientData);
 	    } else if (order.action === 'balance') {
@@ -31,10 +32,7 @@ var logger = {
 	    } else {
 		console.log('Does not handle ' + order.action + ' yet');
 	    }
-	} else {
-	    console.log('Error occurred');
-	    console.log(res.statusCode);
-	}
+
     },
 
     storeLoan : function(parameters, id, clientData) {
@@ -54,6 +52,7 @@ var logger = {
     },
 
     deposit : function(parameters, id, clientData) {
+	console.log('-> Depositing');
 	clientData[parameters.user].accounts[id] += parameters.amount;
     },
 
@@ -69,6 +68,7 @@ var logger = {
 
     storeAccount : function(parameters, id, clientData) {
 	var accounts = {};
+	console.log('Storing account');
 	if (clientData[parameters.user].accounts) {
 	    accounts = clientData[parameters.user].accounts;
 	} 

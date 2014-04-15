@@ -38,7 +38,7 @@ var agent = {
     
     createSimulator : function (bank, logger, clientData) {
 	return function(orders) {
-	    simulator.run(bank, orders, logger, clientData);
+	    clientData = simulator.run(bank, orders, logger, clientData);
 	}
     },
        

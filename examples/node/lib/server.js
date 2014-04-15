@@ -10,6 +10,7 @@ var srv = http.createServer(function (req, res) {
     var search = parsed.search;
     
     var message = parsed.pathname.split('/');
+    console.log(req.url);
 
     console.log(message);
     
