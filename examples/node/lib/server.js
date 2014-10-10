@@ -10,12 +10,9 @@ var srv = http.createServer(function (req, res) {
     var search = parsed.search;
     
     var message = parsed.pathname.split('/');
-    console.log(req.url);
-
-    console.log(message);
     
     if (url.pathname === 'account') {
-	res.end('Account\n');
+      res.end(url.id + '\n');
     }
 
     res.end('Unrecognized command\n');

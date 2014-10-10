@@ -11,17 +11,16 @@ var port = 7331;
 
 var srv = http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    var parsed = url.parse(req.url);
-    var search = parsed.search;
-    
+    var parsed = url.parse(req.url, true);
+    var query = parsed.query;
+
     var message = parsed.pathname.split('/');
-    console.log("S: " + search);
 
     var action = message[1];
     if (action === 'account') {
 	client.store('Hello');
-	console.log('Account!');
-	res.end('[account]: Message parsed OK.\n');
+	console.log(query.id);
+      res.end(query.id);
     } else if (action === 'loan') {
 	console.log('Loan!');
 	res.end('[loan]: Message parsed OK.\n');

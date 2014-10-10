@@ -10,38 +10,41 @@ var fs = require('fs');
 var _ = require('lodash');
 
 var agent = {
+  launch : function launcher(args, simulator, logger) {
+    if (args.length < 1) {
+      console.log('');
+      console.log("  Usage: node agent.js [datadir]");
+      console.log('');
+    } else {
+      var dataDir = args[1];
+      var dest = opt.argv._[1];
+      console.log('Simulating business ...');
 
-    launch : function launcher(args, simulator, logger) {
-	if (args.length < 1) {
-	    console.log('');
-	    console.log("  Usage: node agent.js [datadir]");
-	    console.log('');
-	} else {
-	    var dataDir = args[1];
-	    var dest = opt.argv._[1];
-	    console.log('Simulating business ...');
-
-	    var clientData = {};
-	    
-	    fs.readFile('data/open_account.order', function(err, data) {
-		if (err) {
-		    console.log(err);
-		}
-		
-		var orders = JSON.parse(data);
-		var bank = {url: 'localhost'};
-		var sim = agent.createSimulator(bank, logger, clientData, Date.now());
-		_.each(orders, sim);
-	    });
+      var clientData = {};
+      
+      fs.readFile('data/open_account.order', function(err, data) {
+	if (err) {
+	  console.log(err);
 	}
-    },
-    
-    createSimulator : function (bank, logger, clientData) {
-	return function(orders) {
-	    clientData = simulator.run(bank, orders, logger, clientData);
-	}
-    },
-       
+	
+	var orders = JSON.parse(data);
+	var bank = {url: 'localhost'};
+	//var sim = agent.createSimulator(bank, logger, clientData);
+	//_.each(orders, sim);
+        agent.runMe(bank, orders, 0, logger, clientData);
+      });
+    }
+  },
+  
+  runMe : function(bank, orders, i, logger, clientData) {
+    simulator.run(bank, orders[i], logger, clientData, function(response) {
+      console.log("res: " + response);
+      if (response === orders[i].id && i < orders.length -1) {
+        agent.runMe(bank, orders, i+1, logger, response);
+      }
+    });
+  }
+  
 }
 
 var srv = agent.launch(process.argv, simulator, logger);
