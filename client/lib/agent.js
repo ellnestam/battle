@@ -36,14 +36,18 @@ var agent = {
   
   runMe : function(bank, orders, i, logger, clientData) {
     setTimeout(function() {
-    simulator.run(bank, orders[i], logger, clientData, function(response) {
-      if (response === orders[i].id && i < orders.length - 1) {
-        agent.runMe(bank, orders, i+1, logger, response);                    
-      }
-    });
-  
+      simulator.run(bank, orders[i], logger, clientData, function(response) {
+        if (i >= orders.length - 1) {
+          console.log('Ran script');
+        } else if (response === orders[i].id) {
+          agent.runMe(bank, orders, i+1, logger, response);
+        } else {
+          console.log('Bank could not handle scenario');
+        }
+          
+      });
     }, orders[i].delay * 1000);
-  
+    
   }
 }
 
