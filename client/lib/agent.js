@@ -29,23 +29,25 @@ var agent = {
 	
 	var orders = JSON.parse(data);
 	var bank = {url: 'localhost'};
-	//var sim = agent.createSimulator(bank, logger, clientData);
-	//_.each(orders, sim);
         agent.runMe(bank, orders, 0, logger, clientData);
       });
     }
   },
   
   runMe : function(bank, orders, i, logger, clientData) {
+    setTimeout(function() {
     simulator.run(bank, orders[i], logger, clientData, function(response) {
-      console.log("res: " + response);
-      if (response === orders[i].id && i < orders.length -1) {
-        agent.runMe(bank, orders, i+1, logger, response);
+      if (response === orders[i].id && i < orders.length - 1) {
+        agent.runMe(bank, orders, i+1, logger, response);                    
       }
     });
-  }
   
+    }, orders[i].delay * 1000);
+  
+  }
 }
+
+  
 
 var srv = agent.launch(process.argv, simulator, logger);
 
