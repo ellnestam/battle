@@ -4,6 +4,7 @@
 	"type" : "account", 
 	"action" : "open", 
 	"id": "1",
+        "balance": "1000",
 	"parameters" : {"user" : "harry@hh.se",
 			"pwd" : "s3cr3t"}
     },
@@ -11,7 +12,8 @@
 	"delay" : "0", 
 	"type" : "account", 
 	"action" : "deposit", 
-	"id": "2", 
+	"id": "2",
+        "balance": "1000",
 	"parameters" : {"user" : "harry@hh.se",
 			"pwd" : "s3cr3t",
 			"amount" : "1000"}
@@ -20,6 +22,7 @@
 	"delay" : "2", 
 	"type" : "account", 
 	"action" : "balance",
+        "balance": "1000",
 	"id": "3",
 	"parameters" : {"user" : "harry@hh.se",
 			"pwd" : "s3cr3t"}
@@ -28,6 +31,7 @@
 	"delay" : "2", 
 	"type" : "account", 
 	"action" : "withdraw", 
+        "balance": "0",
 	"id": "4",
 	"parameters" : {"user" : "harry@hh.se",
 		     	"pwd" : "s3cr3t",
