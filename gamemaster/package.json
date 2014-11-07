@@ -1,0 +1,43 @@
+{
+    "name": "BotB",
+    "description": "Receives bank registrations, starts the game and reports the score",
+    "version": "0.1.0",
+    "homepage": "https://github.com/ellnestam/legacy-challenge",
+    "author": {
+	"name": "Ola Ellnestam",
+	"email": "ola@agical.se"
+    },
+    "repository": {
+	"type": "git",
+	"url": "git@github.com:ellnestam/legacy-challenge.git"
+    },
+    "bugs": {
+	"url": "https://github.com/ellnestam/legacy-challenge/issues"
+    },
+    "licenses": [
+	{
+	    "type": "MIT",
+	    "url": "https://github.com/ellnestam/legacy-challenge/blob/master/LICENSE-MIT"
+	}
+    ],
+    "main": "gamemaster/lib/run.js",
+    "engines": {
+	"node": ">= 1.4.0"
+    },
+    "scripts": {
+	"test": "grunt nodeunit"
+    },
+    "dependencies": {
+	"q": "*",
+	"ncp": "*",
+	"optimist": "*",
+	"faye":"*"
+    },
+    "devDependencies": {
+	"grunt-contrib-jshint": "~0.6.4",
+	"grunt-contrib-nodeunit": "~0.2.0",
+	"grunt-contrib-watch": "~0.5.3",
+	"grunt": "~0.4.1"
+    },
+    "keywords": []
+}
