@@ -3,14 +3,14 @@
 var fs = require('fs');
 var q = require('q');
 var opt = require('optimist');
-var simulator = require('./simulator');
+var orderRunner = requir%e('./orderRunner');
 var logger = require('./logger');
 var parser = require('./orderParser');
 var fs = require('fs');
 var _ = require('lodash');
 
 var agent = {
-  launch : function launcher(args, simulator, logger) {
+  launch : function launcher(args, orderRunner, logger) {
     if (args.length < 1) {
       console.log('');
       console.log("  Usage: node agent.js [datadir]");
@@ -36,7 +36,7 @@ var agent = {
   
   runMe : function(bank, orders, i, logger, clientData) {
     setTimeout(function() {
-      simulator.run(bank, orders[i], logger, clientData, function(response) {
+      orderRunner.run(bank, orders[i], logger, clientData, function(response) {
         if (i >= orders.length - 1) {
           console.log('Ran script');
         } else if (response === orders[i].id) {
@@ -53,6 +53,6 @@ var agent = {
 
   
 
-var srv = agent.launch(process.argv, simulator, logger);
+var srv = agent.launch(process.argv, orderRunner, logger);
 
 module.exports = agent;
