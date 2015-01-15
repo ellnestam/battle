@@ -1,0 +1,26 @@
+# Eventlog-format
+#
+# | splittar banker
+# ; splittar attribut
+# : splittar attribut och värde
+#
+# name:Handelsbanken;resultat:12;saveCustomers:20|name:SEB;resultat:322;saveCustomers:330;loanCustomers:12
+#
+# Då kan man rita upp mellan 0 - domus vad gäller antal banker och attribut. Exempelvis kan det se ut såhär.
+#
+
+name:Handelsbanken;resultat:12;saveCustomers:20|name:SEB;resultat:322;saveCustomers:330;loanCustomers:12
+
+#
+#
+# När man parsar detta splittar man alltså först på | och sedan på ; för att sist hämta ut nycklar och värden m.h.a avgränsaren kolon (:). 
+# Fördelen är att allt då kan representeras på en rad och därmed kan sista raden alltid representera 'hela sanningen'. 
+#
+# Man kan dessutom ha olika variabler över tiden samt olika antal variabler per bank. 
+# 
+# I och med detta byggs flexibilitet i protokollet från början och varje klient behöver ta ställning till vad den vill tolka. 
+# Datat blir således så kompakt det kan, men mest av allt så kommunicerar man bara det som är väsentligt hela tiden och som 
+# en bonus blir lätt att utöka datamängden.
+# 
+# Nackdelen är kanske att det kan vara lite svårläst för en människa?
+#
